@@ -5,6 +5,7 @@ var express         = require("express"),
     passport        = require("passport"),
     LocalStrategy   = require("passport-local"),
     Campground      = require("./models/campground"),
+    methodOverride  = require("method-override"),
     Comment         = require("./models/comment"),
     User            = require("./models/user"),
     seedDB          = require("./seeds")
@@ -16,6 +17,7 @@ var commentRoutes       = require("./routes/comments"),
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
 
 // seedDB();  //seed the database
 
