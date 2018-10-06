@@ -83,11 +83,25 @@ router.put("/:id", function(req, res){
        if(err){
            res.redirec("/campgrounds");
        } else {
+           //redirect to show page
            res.redirect("/campgrounds/" + req.params.id);
        }
    });
-   //redirect to show page
 });
+
+// Destroy Campground
+router.delete("/:id", function(req, res){
+   Campground.findByIdAndRemove(req.params.id, function(err){
+      if(err){
+        res.redirect("/campgrounds");  
+      } else {
+          res.redirect("/campgrounds");
+      }
+   });
+});
+
+
+
 //middleware
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
