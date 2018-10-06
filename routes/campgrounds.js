@@ -73,7 +73,7 @@ router.get("/:id/edit", checkCampgroundOwnership, function(req, res){
 });
 
 // Update Campground Route
-router.put("/:id", function(req, res){
+router.put("/:id", checkCampgroundOwnership, function(req, res){
    //find and update the correct campground
    Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
        if(err){
@@ -86,7 +86,7 @@ router.put("/:id", function(req, res){
 });
 
 // Destroy Campground
-router.delete("/:id", function(req, res){
+router.delete("/:id", checkCampgroundOwnership, function(req, res){
    Campground.findByIdAndRemove(req.params.id, function(err){
       if(err){
         res.redirect("/campgrounds");  
@@ -95,8 +95,6 @@ router.delete("/:id", function(req, res){
       }
    });
 });
-
-
 
 //middleware
 function isLoggedIn(req, res, next){
@@ -111,7 +109,7 @@ function checkCampgroundOwnership(req, res, next) {
         
         Campground.findById(req.params.id, function(err, foundCampground){
            if(err){
-               res.redirect("/campgrounds")
+               res.redirect("/campgrounds");
            } else {
                //does user own the campground?
                if(foundCampground.author.id.equals(req.user._id)) {
