@@ -3,6 +3,9 @@ var router = express.Router();
 var Campground = require("../models/campground")
 var Comment = require("../models/comment")
 
+
+
+// Index - show all campgrounds
 router.get("/", function(req, res){
     // Get all campgrounds from DB
         Campground.find({}, function(err, allCampgrounds){
@@ -14,6 +17,7 @@ router.get("/", function(req, res){
         });
 });
 
+//Create Route
 router.post("/", function(req, res){
   //get data from form and add to campgrounds array
   var name = req.body.name
@@ -33,7 +37,7 @@ router.post("/", function(req, res){
   
 });
 
-// Create a New Campground
+// New - show form to create new campground
 router.get("/new", function(req, res){
    res.render("campgrounds/new"); 
 });

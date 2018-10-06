@@ -5,22 +5,14 @@ var Comment = require("../models/comment");
 var User = require("../models/user");
 var passport = require("passport");
 
+
+// root route
 router.get("/", function(req,res){
    res.render("landing");
 });
 
 
-// ==============================================
-//                COMMENTS ROUTES
-// ==============================================
-
-
-
-/// ===========
-/// AUTH ROUTES
-/// ===========
-
-//show register form
+//register form route
 router.get("/register", function(req, res){
     res.render("register");
 });
@@ -59,6 +51,7 @@ router.get("/logout", function(req, res){
    res.redirect("/campgrounds");
 });
 
+// middleware
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
