@@ -96,6 +96,12 @@ router.delete("/:id", checkCampgroundOwnership, function(req, res){
    });
 });
 
+// COMMENT DESTROY ROUTE
+router.delete("/:comment_id", function(req, res){
+   //find by ID and Remove
+   res.send("This is the destroy comment route");
+});
+
 //middleware
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
